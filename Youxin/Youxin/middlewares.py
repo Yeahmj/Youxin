@@ -4,8 +4,9 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import random
 from scrapy import signals
+from Youxin.settings import get_proxy,USER_AGENTS
 
 
 class YouxinSpiderMiddleware(object):
@@ -101,3 +102,18 @@ class YouxinDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class ProxyDownloaderMiddleware(object):
+
+    def process_request(self,request,spider):
+        # print(get_proxy())
+        request.headers['Proxy'] = get_proxy()
+
+class UserAgentDownloaderMiddleware(object):
+
+    def process_request(self,request,spider):
+
+        request.headers['User-Agent'] = random.choice(USER_AGENTS)
+
+
