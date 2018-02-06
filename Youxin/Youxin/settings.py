@@ -15,11 +15,18 @@ SPIDER_MODULES = ['Youxin.spiders']
 NEWSPIDER_MODULE = 'Youxin.spiders'
 
 
+
+
+MONGO_HOST = '127.0.0.1'
+MONGO_PORT = 27017
+MONGO_DBNAME = 'Youxin'
+MONGO_COLNAME = 'toocart'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0'
 
 # Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -27,7 +34,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/2008
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -64,9 +71,9 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'Youxin.pipelines.YouxinPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'Youxin.pipelines.YouxinPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
