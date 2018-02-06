@@ -4,11 +4,26 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from Youxin.items import YouxinItem
 
+# 1.导入类
+from scrapy_redis.spiders import RedisCrawlSpider
 
-class YouxinSpider(CrawlSpider):
+# 2, 修改类的继承
+# class YouxinSpider(CrawlSpider):
+class YouxinSpider(RedisCrawlSpider):
     name = 'youxin'
-    allowed_domains = ['www.xin.com']
-    start_urls = ['https://www.xin.com/shanghai/sn_l6/i1/?channel=baidu&mediaid=1']
+
+    # 3, 注销允许的域和起始的url
+    # allowed_domains = ['www.xin.com']
+    # start_urls = ['https://www.xin.com/shanghai/sn_l6/i1/?channel=baidu&mediaid=1']
+
+    # 4, redis_key
+    redis_key = 'tocar'
+
+    # ---- 5 编写 __init__ ，获取允许的域
+    def __init__(self, *args, **kwargs):
+        domain = kwargs.pop('domain', '')
+        self.allowed_domains = list(filter(None, domain.split(',')))
+        super(YouxinSpider, self).__init__(*args, **kwargs)
 
     rules = (
         # 列表页

@@ -14,8 +14,14 @@ BOT_NAME = 'Youxin'
 SPIDER_MODULES = ['Youxin.spiders']
 NEWSPIDER_MODULE = 'Youxin.spiders'
 
+# 配置使用scrapy_redis的重复过滤器
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
+# 更换调度
+SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
+# 设置调度器队列
+SCHEDULER_PERSIST = True
 
-
+REDIS_URL = 'redis://127.0.0.1:6379'
 
 MONGO_HOST = '127.0.0.1'
 MONGO_PORT = 27017
@@ -73,6 +79,7 @@ DOWNLOAD_DELAY = 5
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'Youxin.pipelines.YouxinPipeline': 300,
+   'scrapy_redis.pipelines.RedisPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
